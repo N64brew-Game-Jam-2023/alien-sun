@@ -1,0 +1,6 @@
+pycparser
+pytiled-parser
+Pillow
+git+https://github.com/drlukeparry/pyclipr.git
+parsy
+numpy
