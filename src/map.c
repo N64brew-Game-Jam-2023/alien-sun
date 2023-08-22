@@ -137,8 +137,10 @@ void map_load(const char *filename, map_t *map, uint32_t state_flags) {
     script_start(map, header->startup_script, NULL);
   }
 
+  /*
   if (header->music_id)
     sound_play_music(header->music_id, 0, 0);
+    */
 }
 
 // ********** MAP TICK **********

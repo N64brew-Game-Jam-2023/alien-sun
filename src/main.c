@@ -60,6 +60,8 @@ int main(void) {
 
   throttle_wait();
 
+  sound_play_music(MUS_OUTDOOR, 0, 0);
+
   global_state_t state = ST_MAIN_MENU;
   while (true) {
     switch (state) {
@@ -175,7 +177,6 @@ static void draw_intro_gradient(float y) {
 }
 
 static void run_intro(void) {
-  return;
   int counter = 0;
   float fade = 0.0;
 

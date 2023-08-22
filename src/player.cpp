@@ -264,6 +264,7 @@ static void yellow_movement(map_t *map, actor_t *actor, const pad_t *kdown, cons
     auto jumpVec = -JUMP_THRUST * b2Vec2(map->gravity_norm_x, map->gravity_norm_y);
     if (underwater) {
       jumpVec = 0.7 * jumpVec;
+      actor_play_fx(actor, SFX_SWIM, 10);
     } else {
       actor_play_fx(actor, SFX_JUMP, 10);
     }

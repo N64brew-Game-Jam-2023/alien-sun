@@ -462,7 +462,7 @@ def process_map(path: Path):
                     sfx_id = 0
                     if value.value is not None:
                         try:
-                            sfx_id = assets.index('sfx', value.value)
+                            sfx_id = assets.index('sfx', '../sounds/' + value.value)
                         except Exception as e:
                             scripterr(script, value, e)
                     buf.write(pack('>I', sfx_id))

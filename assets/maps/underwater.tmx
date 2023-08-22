@@ -612,7 +612,7 @@
   <object id="48" x="303" y="519" width="17" height="9">
    <properties>
     <property name="player" type="bool" value="true"/>
-    <property name="trigger" value="destroy_actor(blockage); earthquake(30, 16);"/>
+    <property name="trigger" value="play_sound(blockage, &quot;explosion&quot;, 20); destroy_actor(blockage); earthquake(30, 16);"/>
    </properties>
   </object>
   <object id="49" gid="300" x="439" y="282" width="19" height="18"/>

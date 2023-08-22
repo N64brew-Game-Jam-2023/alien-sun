@@ -8,10 +8,11 @@
 #include <cfloat>
 #include <cinttypes>
 
-#include "misc.h"
 #include "world.h"
 #include "actors.h"
+#include "assets.h"
 #include "main.h"
+#include "misc.h"
 
 #define WATER_BOX_SIZE (4096.0)
 #define WATER_DAMPING 0.5f
@@ -182,6 +183,7 @@ void ContactListener::Handle(b2Contact *contact, const b2Manifold *old) {
             if (bodyA->GetLinearVelocity().y > POINT_SCALE) {
               map_t *map = world_body_get_map(bodyB);
               particle_spawn_splash(map, bodyA->GetWorldCenter().x * INV_POINT_SCALE);
+              actor_play_fx(a, SFX_SPLASH, 1);
             }
             a->flags |= AF_UNDERWATER;
             bodyA->SetAngularDamping(bodyA->GetAngularDamping() + WATER_DAMPING);
@@ -191,6 +193,7 @@ void ContactListener::Handle(b2Contact *contact, const b2Manifold *old) {
           if (bodyA->GetLinearVelocity().y < -POINT_SCALE) {
             map_t *map = world_body_get_map(bodyB);
             particle_spawn_splash(map, bodyA->GetWorldCenter().x * INV_POINT_SCALE);
+            actor_play_fx(a, SFX_SPLASH, 1);
           }
           a->flags &= ~AF_UNDERWATER;
           bodyA->SetAngularDamping(bodyA->GetAngularDamping() - WATER_DAMPING);

@@ -91,6 +91,8 @@ void mine_collide(actor_t *actor, fixture_t *fix_a, actor_t *other, fixture_t *f
     spawn.count_variance = damage >> 5;
     particle_spawn(map, x, y, &spawn);
 
+    actor_play_fx(actor, SFX_EXPLOSION, 20);
+
     other->body->ApplyLinearImpulseToCenter(sqrtf(damage) * -8.f * manifold.normal, true);
     actor_destroy(map, actor);
   }

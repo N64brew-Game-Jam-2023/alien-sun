@@ -854,7 +854,7 @@
   <object id="58" x="144" y="874" width="16" height="6">
    <properties>
     <property name="player" type="bool" value="true"/>
-    <property name="trigger" value="destroy_actor(blockage); earthquake(30, 16);"/>
+    <property name="trigger" value="play_sound(blockage, &quot;explosion&quot;, 20); destroy_actor(blockage); earthquake(30, 16);"/>
    </properties>
   </object>
   <object id="59" gid="280" x="84" y="1368" width="28" height="27"/>

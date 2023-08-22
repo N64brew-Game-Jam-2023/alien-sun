@@ -69,6 +69,7 @@ void mushroom_collide(actor_t *actor, fixture_t *fix_a, actor_t *other, fixture_
           thrust = 2.f * thrust;
         other->body->ApplyLinearImpulseToCenter(thrust, true);
         actor->flags |= MUSHROOM_FLAG_BOUNCED;
+        actor_play_fx(actor, SFX_BOUNCE, 2);
       }
     }
   }
@@ -101,6 +102,7 @@ void crystal_collide(actor_t *actor, fixture_t *fix_a, actor_t *other, fixture_t
       player->crystals += 5;
     else if (actor->type == AT_CRYSTAL_SM)
       player->crystals++;
+    actor_play_fx(other, SFX_CRYSTAL, 1);
     if (map->hudplayer == other)
       map->hud_crystal_counter = 90;
     actor_destroy(map, actor);
@@ -112,6 +114,7 @@ void powerup_collide(actor_t *actor, fixture_t *fix_a, actor_t *other, fixture_t
     map_t *map = world_body_get_map(actor->body);
     if (other->cls->damage)
       other->cls->damage(map, other, -10, DS_PHYSICAL);
+    actor_play_fx(other, SFX_POWERUP1, 1);
     actor_destroy(map, actor);
   }
 }

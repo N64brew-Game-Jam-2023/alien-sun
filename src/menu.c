@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "assets.h"
 #include "main.h"
 #include "map.h"
 #include "render.h"
@@ -59,6 +60,8 @@ static const menu_action_t back_menu[] = { MA_BACK };
 static int8_t joystick_x_direction = 0;
 static int8_t joystick_y_direction = 0;
 
+static int menu_sound_channel = -1;
+
 global_state_t main_menu_loop(map_t *map) {
   global_state_t state = ST_GAME;
   unsigned long start = get_ticks();
@@ -91,6 +94,7 @@ global_state_t main_menu_loop(map_t *map) {
       pad_t kdown = get_keys_down_stick_to_pad();
       pos = menu_move(pos, &kdown, COUNT_OF(main_menu));
       if (kdown.c[0].A || kdown.c[0].start) {
+        sound_play_fx_global(SFX_BLIP2, 0, &menu_sound_channel);
         switch (main_menu[pos]) {
         case MA_START: goto done;
         case MA_OPTIONS: options_pos = 0; break;
@@ -152,6 +156,7 @@ global_state_t pause_loop(map_t *map) {
         state = ST_GAME;
         goto done;
       } else if (kdown.c[0].A) {
+        sound_play_fx_global(SFX_BLIP2, 0, &menu_sound_channel);
         switch (pause_menu[pos]) {
         case MA_RESUME: state = ST_GAME; goto done; break;
         case MA_OPTIONS: options_pos = 0; break;
@@ -200,15 +205,20 @@ done:
 static int options_menu_tick(int pos, map_t *map, surface_t **screen) {
   controller_scan();
   pad_t kdown = get_keys_down_stick_to_pad();
-  if (kdown.c[0].B || kdown.c[0].start)
+  if (kdown.c[0].B || kdown.c[0].start) {
+    sound_play_fx_global(SFX_BLIP, 0, &menu_sound_channel);
     return -1;
+  }
   pos = menu_move(pos, &kdown, COUNT_OF(options_menu) + 1);
-  if (kdown.c[0].A && pos == COUNT_OF(options_menu))
+  if (kdown.c[0].A && pos == COUNT_OF(options_menu)) {
+    sound_play_fx_global(SFX_BLIP2, 0, &menu_sound_channel);
     return -1;
+  }
   pad_t kpressed = get_keys_pressed();
   switch (pos < COUNT_OF(options_menu) ? options_menu[pos] : MA_BACK) {
     case MA_ASPECT:
       if (kdown.c[0].A || kdown.c[0].left || kdown.c[0].right) {
+        sound_play_fx_global(SFX_BLIP2, 0, &menu_sound_channel);
         change_vid_mode(display_get_width() == 320, map);
         if (screen)
           *screen = NULL;
@@ -292,6 +302,8 @@ static int menu_move(int pos, pad_t *kdown, size_t len) {
     DEC_WRAP(pos, len);
   if (kdown->c[0].down)
     INC_WRAP(pos, len);
+  if (kdown->c[0].up || kdown->c[0].down)
+    sound_play_fx_global(SFX_BLIP, 0, &menu_sound_channel);
   return pos;
 }
 
