@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 #define FPS 60
-#define INV_FPS (1.0/(float)60)
+#define INV_FPS (1.0/(float)FPS)
 #define FRAME_TICKS (TICKS_PER_SECOND / FPS)
 #define INV_FRAME_TICKS (1.0 / (float) (unsigned) FRAME_TICKS)
 

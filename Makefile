@@ -23,7 +23,7 @@ SCRIPT_TILETOOL = tools/tiletool.py
 SCRIPT_MAPTOOL = tools/maptool.py
 SCRIPT_DEPS = tools/util.py
 
-AUDIOCONV_FLAGS ?= --wav-compress 1
+AUDIOCONV_FLAGS ?=
 MKSPRITE_FLAGS ?=
 MKFONT_FLAGS ?=
 MKMODEL_FLAGS ?=

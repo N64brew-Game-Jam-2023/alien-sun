@@ -136,9 +136,8 @@ static void sound_cb(short *buffer, size_t numsamples) {
   }
   FOREACH_SFX_CHAN(channel) {
     if (mixer_ch_playing(channel)) {
-      //float x = current_sfxs[channel].x;
+      float x = current_sfxs[channel].x;
       float lvol, rvol;
-      /*
       if (x != FLT_MAX) {
         float y = current_sfxs[channel].y;
         float att = distance_atttenuation(x, y);
@@ -158,9 +157,8 @@ static void sound_cb(short *buffer, size_t numsamples) {
         current_sfxs[channel].lvol = lvol;
         current_sfxs[channel].rvol = rvol;
       } else {
-        */
         lvol = rvol = 1.0;
-      //}
+      }
       mixer_ch_set_vol(channel, lvol * sfx_volume * 0.1f, rvol * sfx_volume * .1f);
     }
   }
