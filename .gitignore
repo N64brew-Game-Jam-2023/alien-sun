@@ -2,6 +2,5 @@
 /filesystem/
 __pycache__/
 .venv
-*.z64
 *.pak
 *.tiled-session

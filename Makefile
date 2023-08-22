@@ -71,7 +71,7 @@ endif
 
 BOX2D_LIB = $(BUILD_DIR)/box2d/bin/libbox2d.a
 
-all: summer.z64
+all: aliensun.z64
 
 filesystem/%.wav64: assets/%.wav
 	@mkdir -p "$(dir $@)"
@@ -87,7 +87,7 @@ filesystem/fg/water-t1.sprite: MKSPRITE_FLAGS += -f RGBA32
 filesystem/fg/water-t2.sprite: MKSPRITE_FLAGS += -f RGBA32
 filesystem/fg/water-t3.sprite: MKSPRITE_FLAGS += -f RGBA32
 filesystem/fg/lava-3.sprite: MKSPRITE_FLAGS += -f RGBA32
-filesystem/ui/summer.sprite: MKSPRITE_FLAGS += -f RGBA32
+filesystem/ui/aliensun.sprite: MKSPRITE_FLAGS += -f RGBA32
 
 filesystem/%.sprite: assets/%.png
 	@mkdir -p "$(dir $@)"
@@ -151,13 +151,13 @@ $(BOX2D_LIB):
 		-DCMAKE_CXX_FLAGS_RELWITHDEBINFO="$(BOX2D_CXXFLAGS)"
 	@cmake --build build/box2d -- -s
 
-$(BUILD_DIR)/summer.dfs: $(assets_conv)
+$(BUILD_DIR)/aliensun.dfs: $(assets_conv)
 	@mkdir -p $(dir $@)
 	@echo "    [DFS] $@"
 	-@rm $(filter-out $(assets_conv),$(shell find filesystem -type f)) 2>/dev/null
 	@$(N64_MKDFS) $@ filesystem > /dev/null
 
-$(BUILD_DIR)/summer.elf: $(BOX2D_LIB) $(OBJS) $(N64_LIBDIR)/libdragon.a $(N64_LIBDIR)/libdragonsys.a $(N64_LIBDIR)/n64.ld
+$(BUILD_DIR)/aliensun.elf: $(BOX2D_LIB) $(OBJS) $(N64_LIBDIR)/libdragon.a $(N64_LIBDIR)/libdragonsys.a $(N64_LIBDIR)/n64.ld
 	@mkdir -p $(dir $@)
 	@echo "    [LD] $@"
 	EXTERNS_FILE="$(filter %.externs, $^)"; \
@@ -168,13 +168,13 @@ $(BUILD_DIR)/summer.elf: $(BOX2D_LIB) $(OBJS) $(N64_LIBDIR)/libdragon.a $(N64_LI
 	fi
 	$(N64_SIZE) -G $@
 
-summer.z64: N64_ROM_TITLE="Alien Sun"
-summer.z64: N64_ROM_REGIONFREE=1
-summer.z64: $(BUILD_DIR)/summer.dfs
+aliensun.z64: N64_ROM_TITLE="Alien Sun"
+aliensun.z64: N64_ROM_REGIONFREE=1
+aliensun.z64: $(BUILD_DIR)/summer.dfs
 
 clean:
 	@echo "    [CLEAN]"
-	@rm -rf $(BUILD_DIR) filesystem summer.z64
+	@rm -rf $(BUILD_DIR) filesystem aliensun.z64
 
 -include $(wildcard $(BUILD_DIR)/*.d)
 
