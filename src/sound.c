@@ -117,6 +117,7 @@ static void sound_cb(short *buffer, size_t numsamples) {
         for (int ch = end_ch; ch < xm64player_num_channels(&xmplayer); ch++)
           stop_sfx(ch);
         xm64player_play(&xmplayer, CHANNEL_MUSIC);
+        xm64player_set_loop(&xmplayer, true);
       }
     }
   }

@@ -170,7 +170,7 @@ $(BUILD_DIR)/aliensun.elf: $(BOX2D_LIB) $(OBJS) $(N64_LIBDIR)/libdragon.a $(N64_
 
 aliensun.z64: N64_ROM_TITLE="Alien Sun"
 aliensun.z64: N64_ROM_REGIONFREE=1
-aliensun.z64: $(BUILD_DIR)/summer.dfs
+aliensun.z64: $(BUILD_DIR)/aliensun.dfs
 
 clean:
 	@echo "    [CLEAN]"
